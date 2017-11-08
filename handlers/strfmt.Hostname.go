@@ -8,6 +8,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtHostnameHandler creates a hander for faking the strfmt.Hostname type
 func NewStrfmtHostnameHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

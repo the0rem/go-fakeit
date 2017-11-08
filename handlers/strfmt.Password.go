@@ -7,6 +7,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtPasswordHandler creates a hander for faking the strfmt.Password type
 func NewStrfmtPasswordHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

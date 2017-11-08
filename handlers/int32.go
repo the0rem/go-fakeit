@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewInt32Handler creates a hander for faking the int32 type
 func NewInt32Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Int32,

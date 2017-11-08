@@ -8,6 +8,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtSSNHandler creates a hander for faking the strfmt.SSN type
 func NewStrfmtSSNHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

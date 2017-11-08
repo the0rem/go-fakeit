@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewInt16Handler creates a hander for faking the int16 type
 func NewInt16Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Int16,

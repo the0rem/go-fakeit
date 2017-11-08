@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewFloat32Handler creates a hander for faking the float32 type
 func NewFloat32Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Float32,

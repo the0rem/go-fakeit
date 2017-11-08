@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewUIntHandler creates a hander for faking the uint type
 func NewUIntHandler() *Liar {
 	liar := Liar{
 		Kind: reflect.Uint,

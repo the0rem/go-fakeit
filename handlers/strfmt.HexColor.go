@@ -7,6 +7,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtHexColorHandler creates a hander for faking the strfmt.HexColor type
 func NewStrfmtHexColorHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

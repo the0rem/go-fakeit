@@ -6,6 +6,7 @@ import (
 	"github.com/Pallinder/go-randomdata"
 )
 
+// NewBoolHandler creates a hander for faking the bool type
 func NewBoolHandler() *Liar {
 	liar := Liar{
 		Kind: reflect.Bool,

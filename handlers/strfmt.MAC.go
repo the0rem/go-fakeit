@@ -7,6 +7,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
+// NewStrfmtMACHandler creates a hander for faking the strfmt.MAC type
 func NewStrfmtMACHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

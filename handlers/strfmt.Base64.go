@@ -8,6 +8,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtBase64Handler creates a hander for faking the strfmt.Base64 type
 func NewStrfmtBase64Handler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

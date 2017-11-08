@@ -7,6 +7,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtCreditCardHandler creates a hander for faking the strfmt.CreditCard type
 func NewStrfmtCreditCardHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

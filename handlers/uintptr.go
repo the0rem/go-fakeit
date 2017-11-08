@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewUIntPtrHandler creates a hander for faking the uintptr type
 func NewUIntPtrHandler() *Liar {
 	liar := Liar{
 		Kind: reflect.Uintptr,

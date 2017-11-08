@@ -7,9 +7,9 @@ import (
 	"github.com/the0rem/go-fakeit"
 )
 
-type StatusVal int
+type statusVal int
 
-type BigLebowski struct {
+type bigLebowski struct {
 	Name  string
 	Age   int
 	Derps strfmt.CreditCard
@@ -62,36 +62,36 @@ type testStruct struct {
 	Array    [2]strfmt.Password
 	PtrArray [2]*strfmt.Password
 	PtrSlice []*strfmt.Password
-	Slice    []BigLebowski
+	Slice    []bigLebowski
 
-	PtrMap map[string]*BigLebowski
-	Map    map[string]BigLebowski
+	PtrMap map[string]*bigLebowski
+	Map    map[string]bigLebowski
 
 	// Chan chan int
 
 	Interface interface{}
 
 	Ptr       *int
-	PtrStruct *BigLebowski
-	Struct    BigLebowski
+	PtrStruct *bigLebowski
+	Struct    bigLebowski
 
-	StatusVal StatusVal
+	statusVal statusVal
 }
 
-type DunWork struct {
+type dunWork struct {
 	Ptr       *int
-	PtrStruct *BigLebowski
+	PtrStruct *bigLebowski
 	Array     [2]strfmt.Password
-	Slice     []BigLebowski
+	Slice     []bigLebowski
 	PtrSlice  []*strfmt.Password
 	PtrArray  [2]*strfmt.Password
 
-	Map    map[string]BigLebowski
-	MapPtr map[string]*BigLebowski
+	Map    map[string]bigLebowski
+	MapPtr map[string]*bigLebowski
 }
 
 func main() {
-	// test := DunWork{}
+	// test := dunWork{}
 	test := testStruct{}
 	fakeit.FillStruct(&test)
 	fmt.Println("main")

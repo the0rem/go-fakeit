@@ -7,6 +7,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtIPv4Handler creates a hander for faking the strfmt.IPv4 type
 func NewStrfmtIPv4Handler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

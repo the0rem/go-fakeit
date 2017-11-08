@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewFloat64Handler creates a hander for faking the float64 type
 func NewFloat64Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Float64,

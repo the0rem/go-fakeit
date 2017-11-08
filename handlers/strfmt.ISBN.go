@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
+// NewStrfmtISBNHandler creates a hander for faking the strfmt.ISBN type
 func NewStrfmtISBNHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

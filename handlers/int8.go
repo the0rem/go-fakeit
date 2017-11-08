@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewInt8Handler creates a hander for faking the int8 type
 func NewInt8Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Int8,

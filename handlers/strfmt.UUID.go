@@ -7,6 +7,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// NewStrfmtUUIDHandler creates a hander for faking the strfmt.UUID type
 func NewStrfmtUUIDHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

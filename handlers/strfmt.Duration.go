@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
+// NewStrfmtDurationHandler creates a hander for faking the strfmt.Duration type
 func NewStrfmtDurationHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

@@ -9,6 +9,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtRGBColorHandler creates a hander for faking the strfmt.RGBColor type
 func NewStrfmtRGBColorHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

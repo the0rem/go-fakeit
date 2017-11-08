@@ -9,6 +9,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtURIHandler creates a hander for faking the strfmt.URI type
 func NewStrfmtURIHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

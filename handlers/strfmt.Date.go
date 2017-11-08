@@ -7,6 +7,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
+// NewStrfmtDateHandler creates a hander for faking the strfmt.Date type
 func NewStrfmtDateHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

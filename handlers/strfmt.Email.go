@@ -7,6 +7,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
+// NewStrfmtEmailHandler creates a hander for faking the strfmt.Email type
 func NewStrfmtEmailHandler() *Liar {
 	liar := Liar{
 		Kind:    reflect.String,

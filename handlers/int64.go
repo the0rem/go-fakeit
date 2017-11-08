@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// NewInt64Handler creates a hander for faking the int64 type
 func NewInt64Handler() *Liar {
 	liar := Liar{
 		Kind: reflect.Int64,

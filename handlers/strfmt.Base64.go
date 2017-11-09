@@ -9,18 +9,18 @@ import (
 )
 
 // NewStrfmtBase64Handler creates a hander for faking the strfmt.Base64 type
-func NewStrfmtBase64Handler() *Liar {
-	liar := Liar{
+func NewStrfmtBase64Handler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.Base64",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.Base64
 		item.Scan(base64.StdEncoding.EncodeToString([]byte(fake.Words())))
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

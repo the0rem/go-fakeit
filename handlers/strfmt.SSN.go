@@ -9,18 +9,18 @@ import (
 )
 
 // NewStrfmtSSNHandler creates a hander for faking the strfmt.SSN type
-func NewStrfmtSSNHandler() *Liar {
-	liar := Liar{
+func NewStrfmtSSNHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.SSN",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.SSN
 		item.Scan(fmt.Sprintf("%s-%s-%s", fake.DigitsN(3), fake.DigitsN(2), fake.DigitsN(4)))
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

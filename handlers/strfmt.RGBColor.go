@@ -10,14 +10,14 @@ import (
 )
 
 // NewStrfmtRGBColorHandler creates a hander for faking the strfmt.RGBColor type
-func NewStrfmtRGBColorHandler() *Liar {
-	liar := Liar{
+func NewStrfmtRGBColorHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.RGBColor",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.RGBColor
 
 		rgbHex := fake.HexColor()
@@ -35,8 +35,8 @@ func NewStrfmtRGBColorHandler() *Liar {
 		}
 
 		item.Scan(fmt.Sprintf("rgb(%s, %s, %s)", red, green, blue))
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

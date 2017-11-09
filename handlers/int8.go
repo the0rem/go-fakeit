@@ -7,16 +7,16 @@ import (
 )
 
 // NewInt8Handler creates a hander for faking the int8 type
-func NewInt8Handler() *Liar {
-	liar := Liar{
+func NewInt8Handler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Int8,
 		Type: "int8",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
-		field.Set(reflect.ValueOf(int8(r.Int())))
+		return reflect.ValueOf(int8(r.Int()))
 	}
 
-	return &liar
+	return &TypeHandler
 }

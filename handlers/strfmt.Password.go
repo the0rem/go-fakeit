@@ -8,18 +8,18 @@ import (
 )
 
 // NewStrfmtPasswordHandler creates a hander for faking the strfmt.Password type
-func NewStrfmtPasswordHandler() *Liar {
-	liar := Liar{
+func NewStrfmtPasswordHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.Password",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.Password
 		item.Scan(fake.SimplePassword())
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

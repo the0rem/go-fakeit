@@ -7,18 +7,18 @@ import (
 )
 
 // NewStrfmtISBNHandler creates a hander for faking the strfmt.ISBN type
-func NewStrfmtISBNHandler() *Liar {
-	liar := Liar{
+func NewStrfmtISBNHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.ISBN",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.ISBN
 		item.Scan("")
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

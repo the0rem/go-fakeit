@@ -41,7 +41,7 @@ type testStruct struct {
 	Password   strfmt.Password
 
 	Bool   bool
-	String string
+	String string `fakeit:"password,min=13,max=30"`
 
 	Int        int
 	Int8       int8

@@ -1,10 +1,105 @@
-package handlers
+package fakers
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/icrowley/fake"
 )
+
+func NewFakers() map[string]func(args ...interface{}) interface{} {
+	return map[string]func(args ...interface{}) interface{}{
+		"brand":                    Brand,
+		"character":                Character,
+		"characters":               Characters,
+		"charactersN":              CharactersN,
+		"city":                     City,
+		"color":                    Color,
+		"company":                  Company,
+		"continent":                Continent,
+		"country":                  Country,
+		"creditCardType":           CreditCardType,
+		"creditCardNum":            CreditCardNum,
+		"currency":                 Currency,
+		"currencyCode":             CurrencyCode,
+		"day":                      Day,
+		"digits":                   Digits,
+		"digitsN":                  DigitsN,
+		"domainName":               DomainName,
+		"domainZone":               DomainZone,
+		"emailAddress":             EmailAddress,
+		"emailBody":                EmailBody,
+		"emailSubject":             EmailSubject,
+		"femaleFirstName":          FemaleFirstName,
+		"femaleFullName":           FemaleFullName,
+		"femaleFullNameWithPrefix": FemaleFullNameWithPrefix,
+		"femaleFullNameWithSuffix": FemaleFullNameWithSuffix,
+		"femaleLastName":           FemaleLastName,
+		"femalePatronymic":         FemalePatronymic,
+		"firstName":                FirstName,
+		"fullName":                 FullName,
+		"fullNameWithPrefix":       FullNameWithPrefix,
+		"fullNameWithSuffix":       FullNameWithSuffix,
+		"gender":                   Gender,
+		"genderAbbrev":             GenderAbbrev,
+		"hexColor":                 HexColor,
+		"hexColorShort":            HexColorShort,
+		"iPv4":                     IPv4,
+		"iPv6":                     IPv6,
+		"industry":                 Industry,
+		"jobTitle":                 JobTitle,
+		"language":                 Language,
+		"lastName":                 LastName,
+		"latitude":                 Latitude,
+		"latitudeDegrees":          LatitudeDegrees,
+		"latitudeDirection":        LatitudeDirection,
+		"latitudeMinutes":          LatitudeMinutes,
+		"latitudeSeconds":          LatitudeSeconds,
+		"longitude":                Longitude,
+		"longitudeDegrees":         LongitudeDegrees,
+		"longitudeDirection":       LongitudeDirection,
+		"longitudeMinutes":         LongitudeMinutes,
+		"longitudeSeconds":         LongitudeSeconds,
+		"maleFirstName":            MaleFirstName,
+		"maleFullName":             MaleFullName,
+		"maleFullNameWithPrefix":   MaleFullNameWithPrefix,
+		"maleFullNameWithSuffix":   MaleFullNameWithSuffix,
+		"maleLastName":             MaleLastName,
+		"malePatronymic":           MalePatronymic,
+		"model":                    Model,
+		"month":                    Month,
+		"monthNum":                 MonthNum,
+		"monthShort":               MonthShort,
+		"paragraph":                Paragraph,
+		"paragraphs":               Paragraphs,
+		"paragraphsN":              ParagraphsN,
+		"password":                 Password,
+		"patronymic":               Patronymic,
+		"phone":                    Phone,
+		"product":                  Product,
+		"productName":              ProductName,
+		"sentence":                 Sentence,
+		"sentences":                Sentences,
+		"sentencesN":               SentencesN,
+		"simplePassword":           SimplePassword,
+		"state":                    State,
+		"stateAbbrev":              StateAbbrev,
+		"street":                   Street,
+		"streetAddress":            StreetAddress,
+		"title":                    Title,
+		"topLevelDomain":           TopLevelDomain,
+		"userAgent":                UserAgent,
+		"userName":                 UserName,
+		"weekDay":                  WeekDay,
+		"weekDayNum":               WeekDayNum,
+		"weekDayShort":             WeekDayShort,
+		"word":                     Word,
+		"words":                    Words,
+		"wordsN":                   WordsN,
+		"year":                     Year,
+		"zip":                      Zip,
+	}
+}
 
 func Brand(args ...interface{}) interface{} {
 	return fake.Brand()
@@ -279,18 +374,19 @@ func ParagraphsN(args ...interface{}) interface{} {
 }
 
 func Password(args ...interface{}) interface{} {
-	from := 6
+	var from int
+	from = 6
 	to := 12
 	allowUpper := true
 	allowNumeric := true
 	allowSpecial := true
 
 	if len(args) > 0 {
-		from = args[0].(int)
+		from, _ = strconv.Atoi(args[0].(string))
 	}
 
 	if len(args) > 1 {
-		to = args[1].(int)
+		to, _ = strconv.Atoi(args[1].(string))
 	}
 
 	if len(args) > 2 {

@@ -7,16 +7,16 @@ import (
 )
 
 // NewIntHandler creates a hander for faking the int type
-func NewIntHandler() *Liar {
-	liar := Liar{
+func NewIntHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Int,
 		Type: "int",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
-		field.Set(reflect.ValueOf(r.Int()))
+		return reflect.ValueOf(r.Int())
 	}
 
-	return &liar
+	return &TypeHandler
 }

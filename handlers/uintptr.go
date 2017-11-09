@@ -7,17 +7,17 @@ import (
 )
 
 // NewUIntPtrHandler creates a hander for faking the uintptr type
-func NewUIntPtrHandler() *Liar {
-	liar := Liar{
+func NewUIntPtrHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Uintptr,
 		Type: "uintptr",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
 		ptr := uintptr(r.Uint32())
-		field.Set(reflect.ValueOf(ptr))
+		return reflect.ValueOf(ptr)
 	}
 
-	return &liar
+	return &TypeHandler
 }

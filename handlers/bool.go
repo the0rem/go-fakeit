@@ -7,15 +7,15 @@ import (
 )
 
 // NewBoolHandler creates a hander for faking the bool type
-func NewBoolHandler() *Liar {
-	liar := Liar{
+func NewBoolHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Bool,
 		Type: "bool",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
-		field.Set(reflect.ValueOf(randomdata.Boolean()))
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
+		return reflect.ValueOf(randomdata.Boolean())
 	}
 
-	return &liar
+	return &TypeHandler
 }

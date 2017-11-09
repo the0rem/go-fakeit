@@ -7,16 +7,16 @@ import (
 )
 
 // NewUInt64Handler creates a hander for faking the uint64 type
-func NewUInt64Handler() *Liar {
-	liar := Liar{
+func NewUInt64Handler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Uint64,
 		Type: "uint64",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
-		field.Set(reflect.ValueOf(r.Uint64()))
+		return reflect.ValueOf(r.Uint64())
 	}
 
-	return &liar
+	return &TypeHandler
 }

@@ -10,18 +10,18 @@ import (
 )
 
 // NewStrfmtURIHandler creates a hander for faking the strfmt.URI type
-func NewStrfmtURIHandler() *Liar {
-	liar := Liar{
+func NewStrfmtURIHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.URI",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.URI
 		item.Scan(fmt.Sprintf("https://%s/", strings.ToLower(fake.DomainName())))
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

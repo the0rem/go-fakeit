@@ -1,2 +1,2 @@
-# go-fake-it
-Go Faker designed to work with go-openapi/strfmt and Struct field tag interpolation
+# go-fakeit
+Go Fakeit designed to work with go-openapi/strfmt and Struct field tag interpolation

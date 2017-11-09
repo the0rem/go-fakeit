@@ -7,16 +7,16 @@ import (
 )
 
 // NewFloat64Handler creates a hander for faking the float64 type
-func NewFloat64Handler() *Liar {
-	liar := Liar{
+func NewFloat64Handler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Float64,
 		Type: "float64",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
-		field.Set(reflect.ValueOf(r.Float64()))
+		return reflect.ValueOf(r.Float64())
 	}
 
-	return &liar
+	return &TypeHandler
 }

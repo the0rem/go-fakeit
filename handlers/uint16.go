@@ -7,16 +7,16 @@ import (
 )
 
 // NewUInt16Handler creates a hander for faking the uint16 type
-func NewUInt16Handler() *Liar {
-	liar := Liar{
+func NewUInt16Handler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.Uint16,
 		Type: "uint16",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
-		field.Set(reflect.ValueOf(uint16(r.Uint32())))
+		return reflect.ValueOf(uint16(r.Uint32()))
 	}
 
-	return &liar
+	return &TypeHandler
 }

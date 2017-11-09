@@ -8,18 +8,18 @@ import (
 )
 
 // NewStrfmtHexColorHandler creates a hander for faking the strfmt.HexColor type
-func NewStrfmtHexColorHandler() *Liar {
-	liar := Liar{
+func NewStrfmtHexColorHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.HexColor",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.HexColor
 		item.Scan(fake.HexColor())
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

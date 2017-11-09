@@ -8,19 +8,19 @@ import (
 )
 
 // NewStrfmtDateHandler creates a hander for faking the strfmt.Date type
-func NewStrfmtDateHandler() *Liar {
-	liar := Liar{
+func NewStrfmtDateHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.Date",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.Date
 		dateTime, _ := strfmt.ParseDateTime(randomdata.FullDate())
 		item.Scan(dateTime.String())
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

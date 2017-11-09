@@ -7,15 +7,15 @@ import (
 )
 
 // NewStringHandler creates a hander for faking the string type
-func NewStringHandler() *Liar {
-	liar := Liar{
+func NewStringHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind: reflect.String,
 		Type: "string",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
-		field.Set(reflect.ValueOf(randomdata.SillyName()))
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
+		return reflect.ValueOf(randomdata.SillyName())
 	}
 
-	return &liar
+	return &TypeHandler
 }

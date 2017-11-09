@@ -8,18 +8,18 @@ import (
 )
 
 // NewStrfmtUUIDHandler creates a hander for faking the strfmt.UUID type
-func NewStrfmtUUIDHandler() *Liar {
-	liar := Liar{
+func NewStrfmtUUIDHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.UUID",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.UUID
 		item.Scan(uuid.NewV1().String())
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

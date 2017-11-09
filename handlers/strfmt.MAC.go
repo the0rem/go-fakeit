@@ -8,18 +8,18 @@ import (
 )
 
 // NewStrfmtMACHandler creates a hander for faking the strfmt.MAC type
-func NewStrfmtMACHandler() *Liar {
-	liar := Liar{
+func NewStrfmtMACHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.MAC",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.MAC
 		item.Scan(randomdata.MacAddress())
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

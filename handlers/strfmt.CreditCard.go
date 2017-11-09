@@ -8,18 +8,18 @@ import (
 )
 
 // NewStrfmtCreditCardHandler creates a hander for faking the strfmt.CreditCard type
-func NewStrfmtCreditCardHandler() *Liar {
-	liar := Liar{
+func NewStrfmtCreditCardHandler() *TypeHandler {
+	TypeHandler := TypeHandler{
 		Kind:    reflect.String,
 		Type:    "strfmt.CreditCard",
 		Package: "github.com/go-openapi/strfmt",
 	}
 
-	liar.Fill = func(field reflect.Value, args Tag) {
+	TypeHandler.GetDefaultFaker = func() reflect.Value {
 		var item strfmt.CreditCard
 		item.Scan(fake.CreditCardNum(""))
-		field.Set(reflect.ValueOf(item))
+		return reflect.ValueOf(item)
 	}
 
-	return &liar
+	return &TypeHandler
 }

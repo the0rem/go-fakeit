@@ -116,7 +116,7 @@ func Characters(args ...interface{}) interface{} {
 func CharactersN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.CharactersN(number)
 }
@@ -172,7 +172,7 @@ func Digits(args ...interface{}) interface{} {
 func DigitsN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.DigitsN(number)
 }
@@ -368,7 +368,7 @@ func Paragraphs(args ...interface{}) interface{} {
 func ParagraphsN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.ParagraphsN(number)
 }
@@ -431,7 +431,7 @@ func Sentences(args ...interface{}) interface{} {
 func SentencesN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.SentencesN(number)
 }
@@ -495,7 +495,7 @@ func Words(args ...interface{}) interface{} {
 func WordsN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.WordsN(number)
 }
@@ -503,12 +503,12 @@ func WordsN(args ...interface{}) interface{} {
 func Year(args ...interface{}) interface{} {
 	from := time.Now().Year() - 10
 	if len(args) > 0 {
-		from = args[0].(int)
+		from, _ = strconv.Atoi(args[0].(string))
 	}
 
 	to := time.Now().Year() + 10
 	if len(args) > 1 {
-		to = args[1].(int)
+		to, _ = strconv.Atoi(args[1].(string))
 	}
 
 	return fake.Year(from, to)

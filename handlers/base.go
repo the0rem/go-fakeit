@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 
@@ -23,12 +22,12 @@ func NewTagHandler(tagString string) *Tag {
 
 	tags, err := structtag.Parse(string(tagString))
 	if err != nil {
-		panic(err)
-	}
-
-	tag, err = tags.Get(FakeItTag)
-	if err != nil {
 		tag = &structtag.Tag{}
+	} else {
+		tag, err = tags.Get(FakeItTag)
+		if err != nil {
+			tag = &structtag.Tag{}
+		}
 	}
 
 	var options []string
@@ -60,7 +59,6 @@ type TypeHandler struct {
 
 func (typeHandler *TypeHandler) FakeIt(field reflect.Value, tag *Tag) {
 	if tag.IsFakerOveridden() {
-		fmt.Println("Shit is overridden")
 		field.Set(tag.GetFakerValue())
 	} else {
 		field.Set(typeHandler.GetDefaultFaker())
@@ -73,11 +71,11 @@ type Tag struct {
 }
 
 func (tag *Tag) IsEmpty() bool {
-	return tag.Tag.Key != ""
+	return (Tag{}).Tag == tag.Tag || tag.Tag.Key == ""
 }
 
 func (tag *Tag) HasIndex(index int) bool {
-	return len(tag.Options) >= index
+	return len(tag.Options) > index
 }
 
 func (tag *Tag) GetIndex(index int) string {
@@ -85,6 +83,9 @@ func (tag *Tag) GetIndex(index int) string {
 }
 
 func (tag *Tag) IsFakerOveridden() bool {
+	if (Tag{}).Tag == tag.Tag {
+		return false
+	}
 	if _, ok := fakerHandlers[tag.Tag.Name]; ok {
 		return true
 	}

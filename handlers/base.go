@@ -20,6 +20,7 @@ var fakerHandlers = fakers.NewFakers()
 // NewTagHandler takes a given Struct Field Tag and populates a Tag struct with the processed tag data.
 func NewTagHandler(tagString string) *Tag {
 	var tag *structtag.Tag
+
 	tags, err := structtag.Parse(string(tagString))
 	if err != nil {
 		panic(err)
@@ -28,11 +29,6 @@ func NewTagHandler(tagString string) *Tag {
 	tag, err = tags.Get(FakeItTag)
 	if err != nil {
 		tag = &structtag.Tag{}
-	} else {
-		fmt.Println(tag)         // Output: json:"foo,omitempty,string"
-		fmt.Println(tag.Key)     // Output: json
-		fmt.Println(tag.Name)    // Output: foo
-		fmt.Println(tag.Options) // Output: [omitempty string]
 	}
 
 	var options []string
@@ -40,8 +36,6 @@ func NewTagHandler(tagString string) *Tag {
 	for _, option := range tag.Options {
 		options = append(options, parseOption(option))
 	}
-
-	fmt.Println(options)
 
 	return &Tag{
 		Options: options,

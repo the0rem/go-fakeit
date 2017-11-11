@@ -96,12 +96,15 @@ var fakeMaker = FakeMaker{
 	},
 }
 
-func FillStruct(a interface{}) {
+// FakeIt takes a struct and populates it with fake data.
+func FakeIt(a interface{}) {
 	t := reflect.TypeOf(a)
 	valueOf := reflect.ValueOf(a)
 	DisectFields(t, valueOf, "", handlers.NewTagHandler(""))
 }
 
+// DisectFields takes the reflect properties of an interface and recursively populates the
+// associated proerties using the appropriate fakers.
 func DisectFields(t reflect.Type, valueOf reflect.Value, logPrefix string, tagHandler *handlers.Tag) {
 
 	if valueOf.Kind() != reflect.Ptr {

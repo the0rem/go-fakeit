@@ -11,7 +11,8 @@ import (
 const (
 	// FakeItTag identifies the tag uses on Struct Fields
 	// for specifying which fakeit method to use
-	FakeItTag = "fakeit"
+	FakeItTag  = "fakeit"
+	IgnoreFlag = "-"
 )
 
 var fakerHandlers = fakers.NewFakers()
@@ -87,6 +88,16 @@ func (tag *Tag) IsFakerOveridden() bool {
 		return false
 	}
 	if _, ok := fakerHandlers[tag.Tag.Name]; ok {
+		return true
+	}
+	return false
+}
+
+func (tag *Tag) IsFieldIgnored() bool {
+	if (Tag{}).Tag == tag.Tag {
+		return false
+	}
+	if tag.Tag.Name == IgnoreFlag {
 		return true
 	}
 	return false

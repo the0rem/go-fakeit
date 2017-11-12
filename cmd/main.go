@@ -41,7 +41,7 @@ type testStruct struct {
 	Password   strfmt.Password
 
 	Bool   bool
-	String string `fakeit:"password,min=13,max=30"`
+	String string `fakeit:"password,min=25,max=30"`
 
 	Int        int
 	Int8       int8
@@ -93,7 +93,7 @@ type dunWork struct {
 func main() {
 	// test := dunWork{}
 	test := testStruct{}
-	fakeit.FillStruct(&test)
+	fakeit.FakeIt(&test)
 	fmt.Println("main")
 	fmt.Printf("%+v\n", test)
 }

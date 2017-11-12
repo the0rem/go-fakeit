@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 
@@ -12,7 +11,8 @@ import (
 const (
 	// FakeItTag identifies the tag uses on Struct Fields
 	// for specifying which fakeit method to use
-	FakeItTag = "fakeit"
+	FakeItTag  = "fakeit"
+	IgnoreFlag = "-"
 )
 
 var fakerHandlers = fakers.NewFakers()
@@ -20,19 +20,15 @@ var fakerHandlers = fakers.NewFakers()
 // NewTagHandler takes a given Struct Field Tag and populates a Tag struct with the processed tag data.
 func NewTagHandler(tagString string) *Tag {
 	var tag *structtag.Tag
-	tags, err := structtag.Parse(string(tagString))
-	if err != nil {
-		panic(err)
-	}
 
-	tag, err = tags.Get(FakeItTag)
+	tags, err := structtag.Parse(string(tagString))
 	if err != nil {
 		tag = &structtag.Tag{}
 	} else {
-		fmt.Println(tag)         // Output: json:"foo,omitempty,string"
-		fmt.Println(tag.Key)     // Output: json
-		fmt.Println(tag.Name)    // Output: foo
-		fmt.Println(tag.Options) // Output: [omitempty string]
+		tag, err = tags.Get(FakeItTag)
+		if err != nil {
+			tag = &structtag.Tag{}
+		}
 	}
 
 	var options []string
@@ -40,8 +36,6 @@ func NewTagHandler(tagString string) *Tag {
 	for _, option := range tag.Options {
 		options = append(options, parseOption(option))
 	}
-
-	fmt.Println(options)
 
 	return &Tag{
 		Options: options,
@@ -66,7 +60,6 @@ type TypeHandler struct {
 
 func (typeHandler *TypeHandler) FakeIt(field reflect.Value, tag *Tag) {
 	if tag.IsFakerOveridden() {
-		fmt.Println("Shit is overridden")
 		field.Set(tag.GetFakerValue())
 	} else {
 		field.Set(typeHandler.GetDefaultFaker())
@@ -79,11 +72,11 @@ type Tag struct {
 }
 
 func (tag *Tag) IsEmpty() bool {
-	return tag.Tag.Key != ""
+	return (Tag{}).Tag == tag.Tag || tag.Tag.Key == ""
 }
 
 func (tag *Tag) HasIndex(index int) bool {
-	return len(tag.Options) >= index
+	return len(tag.Options) > index
 }
 
 func (tag *Tag) GetIndex(index int) string {
@@ -91,7 +84,20 @@ func (tag *Tag) GetIndex(index int) string {
 }
 
 func (tag *Tag) IsFakerOveridden() bool {
+	if (Tag{}).Tag == tag.Tag {
+		return false
+	}
 	if _, ok := fakerHandlers[tag.Tag.Name]; ok {
+		return true
+	}
+	return false
+}
+
+func (tag *Tag) IsFieldIgnored() bool {
+	if (Tag{}).Tag == tag.Tag {
+		return false
+	}
+	if tag.Tag.Name == IgnoreFlag {
 		return true
 	}
 	return false

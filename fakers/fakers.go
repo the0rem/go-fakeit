@@ -9,7 +9,7 @@ import (
 	"github.com/icrowley/fake"
 )
 
-// NewFakers returns a map of the available fakers.
+// NewFakers returns a map of the available fakers
 func NewFakers() map[string]func(args ...interface{}) interface{} {
 	return map[string]func(args ...interface{}) interface{}{
 		"brand":                    Brand,

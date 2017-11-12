@@ -11,3 +11,4 @@ Go Fakeit designed to work with go-openapi/strfmt and Struct field tag interpola
 [ ] Complete test coverage for handlers and fakers
 [ ] Add godocs for public functions
 [X] Add handling for limiting recursion depth of circular dependencies
+[X] Add Struct Field Tag option to omit Field from being faked

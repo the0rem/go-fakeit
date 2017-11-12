@@ -71,7 +71,6 @@ type FakeMaker struct {
 	TypeHandlers           []*handlers.TypeHandler
 	MaxRecursion           int
 	recusrionDepth         int
-	followedStructs        []string
 	AllowCircularRecursion bool
 	Verbose                bool
 }
@@ -115,6 +114,7 @@ func (fakeMaker *FakeMaker) GenerateValue(field reflect.Value, tag *handlers.Tag
 	}
 }
 
+// FakeIt takes a struct and populates it with fake data. This is the struct method equivalent of the public function.
 func (fakeMaker *FakeMaker) FakeIt(a interface{}) {
 	t := reflect.TypeOf(a)
 	valueOf := reflect.ValueOf(a)

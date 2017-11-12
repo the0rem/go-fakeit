@@ -9,7 +9,7 @@ import (
 // NewStrfmtDurationHandler creates a hander for faking the strfmt.Duration type
 func NewStrfmtDurationHandler() *TypeHandler {
 	TypeHandler := TypeHandler{
-		Kind:    reflect.String,
+		Kind:    reflect.Int64,
 		Type:    "strfmt.Duration",
 		Package: "github.com/go-openapi/strfmt",
 	}

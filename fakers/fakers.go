@@ -172,7 +172,7 @@ func Digits(args ...interface{}) interface{} {
 func DigitsN(args ...interface{}) interface{} {
 	number := 1
 	if len(args) > 0 {
-		number = args[0].(int)
+		number, _ = strconv.Atoi(args[0].(string))
 	}
 	return fake.DigitsN(number)
 }

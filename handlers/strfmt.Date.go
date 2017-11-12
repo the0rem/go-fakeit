@@ -10,7 +10,7 @@ import (
 // NewStrfmtDateHandler creates a hander for faking the strfmt.Date type
 func NewStrfmtDateHandler() *TypeHandler {
 	TypeHandler := TypeHandler{
-		Kind:    reflect.String,
+		Kind:    reflect.Struct,
 		Type:    "strfmt.Date",
 		Package: "github.com/go-openapi/strfmt",
 	}

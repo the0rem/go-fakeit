@@ -1,6 +1,8 @@
 package fakers
 
 import (
+	"fmt"
+	"math/rand"
 	"strconv"
 	"time"
 
@@ -20,6 +22,7 @@ func NewFakers() map[string]func(args ...interface{}) interface{} {
 		"country":                  Country,
 		"creditCardType":           CreditCardType,
 		"creditCardNum":            CreditCardNum,
+		"cron":                     Cron,
 		"currency":                 Currency,
 		"currencyCode":             CurrencyCode,
 		"day":                      Day,
@@ -30,6 +33,7 @@ func NewFakers() map[string]func(args ...interface{}) interface{} {
 		"emailAddress":             EmailAddress,
 		"emailBody":                EmailBody,
 		"emailSubject":             EmailSubject,
+		"enum":                     Enum,
 		"femaleFirstName":          FemaleFirstName,
 		"femaleFullName":           FemaleFullName,
 		"femaleFullNameWithPrefix": FemaleFullNameWithPrefix,
@@ -153,6 +157,15 @@ func CreditCardNum(args ...interface{}) interface{} {
 	return fake.CreditCardNum(provider)
 }
 
+func Cron(args ...interface{}) interface{} {
+	minute := rand.Intn(59-0) + 0
+	hour := rand.Intn(23-0) + 0
+	monthDay := rand.Intn(31-1) + 1
+	month := rand.Intn(12-1) + 1
+	weekDay := rand.Intn(6-0) + 0
+	return fmt.Sprintf("%d %d %d %d %d", minute, hour, monthDay, month, weekDay)
+}
+
 func Currency(args ...interface{}) interface{} {
 	return fake.Currency()
 }
@@ -183,6 +196,16 @@ func DomainName(args ...interface{}) interface{} {
 
 func DomainZone(args ...interface{}) interface{} {
 	return fake.DomainZone()
+}
+
+func Enum(args ...interface{}) interface{} {
+	var enum []string
+	for _, arg := range args {
+		enum = append(enum, arg.(string))
+	}
+	rand.Seed(time.Now().Unix())
+	n := rand.Int() % len(enum)
+	return enum[n]
 }
 
 func EmailAddress(args ...interface{}) interface{} {
